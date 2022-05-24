@@ -42,14 +42,26 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/resTextView"
+        android:id="@+id/sumTextView"
         android:layout_width="266dp"
         android:layout_height="125dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="152dp"
-        android:hint="Res Text View"
+        android:hint="Sum View"
         android:ellipsize="start"
         android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sumBtn" />
+
+    <TextView
+        android:id="@+id/totalSumTextView"
+        android:layout_width="266dp"
+        android:layout_height="125dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="308dp"
+        android:ellipsize="start"
+        android:gravity="center"
+        android:hint="Total Sum View"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sumBtn" />
 
