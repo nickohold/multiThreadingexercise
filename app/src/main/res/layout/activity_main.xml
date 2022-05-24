@@ -7,13 +7,25 @@
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/updateButton"
+        android:layout_width="370dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="448dp"
+        android:onClick="updateClick"
+        android:text="@string/updateArrayHint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.39"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
         android:id="@+id/sumBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="136dp"
-        android:layout_marginTop="232dp"
+        android:layout_width="369dp"
+        android:layout_height="93dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="84dp"
         android:onClick="sumClick"
-        android:text="Sum"
+        android:text="@string/sumHint"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,48 +33,82 @@
         android:id="@+id/num2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="225dp"
-        android:layout_marginTop="137dp"
-        android:hint="Num 2"
+        android:layout_marginTop="24dp"
+        android:hint="@string/num2Hint"
+
         android:inputType="number"
         android:minHeight="48dp"
-        app:layout_constraintStart_toStartOf="parent"
+
+        android:textColorHint="#757575"
+        app:layout_constraintStart_toEndOf="@+id/num1"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/num1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="73dp"
-        android:layout_marginTop="137dp"
-        android:hint="Num 1"
+        android:layout_marginTop="24dp"
+        android:hint="@string/num1Hint"
         android:inputType="number"
         android:minHeight="48dp"
+        app:layout_constraintEnd_toStartOf="@+id/num2"
+        app:layout_constraintHorizontal_bias="0.184"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/sumTextView"
-        android:layout_width="266dp"
-        android:layout_height="125dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="152dp"
-        android:hint="Sum View"
+        android:layout_width="366dp"
+        android:layout_height="102dp"
+        android:layout_marginTop="12dp"
         android:ellipsize="start"
-        android:gravity="center"
+        android:hint="@string/sumViewHint"
+        android:maxWidth="230dp"
+        android:maxHeight="70dp"
+        android:scrollbars="vertical"
+        android:textAlignment="viewStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.355"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sumBtn" />
 
     <TextView
         android:id="@+id/totalSumTextView"
-        android:layout_width="266dp"
-        android:layout_height="125dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="308dp"
+        android:layout_width="367dp"
+        android:layout_height="103dp"
+        android:ellipsize="end"
+        android:hint="@string/totalSumViewHint"
+        android:maxWidth="230dp"
+        android:maxHeight="70dp"
+        android:scrollbars="vertical"
+        android:textAlignment="viewStart"
+        app:layout_constraintBottom_toTopOf="@+id/updateButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.35"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sumTextView" />
+
+    <TextView
+        android:id="@+id/totalSumsArrayTextView"
+        android:layout_width="369dp"
+        android:layout_height="107dp"
         android:ellipsize="start"
         android:gravity="center"
-        android:hint="Total Sum View"
+        android:hint="@string/totalSumsArrayViewHint"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.38"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sumBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/updateButton" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

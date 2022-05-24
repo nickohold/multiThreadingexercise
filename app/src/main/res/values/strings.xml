@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">multiThreadingexercise</string>
+    <string name="app_name">multiThreadingExercise</string>
+    <string name="num2Hint">Num 2</string>
+    <string name="sumHint">Sum</string>
+    <string name="totalSumViewHint">Total Sum View</string>
+    <string name="totalSumsArrayViewHint">Total Sums Array View</string>
+    <string name="sumViewHint">Sum View</string>
+    <string name="num1Hint">Num 1</string>
+    <string name="updateArrayHint">Update Array</string>
+    <string name="upatedFromThread">Updated from thread:\ </string>
 </resources>
