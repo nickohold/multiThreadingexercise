@@ -83,9 +83,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private int getSumOfArray() {
-        synchronized(mSumsArrayList) {
-            return mSumsArrayList.stream().reduce(0, (sum, next) -> sum + next);
-        }
+        return getSumListCopy().stream().reduce(0, (sum, next) -> sum + next);
+    }
+    
+    private List getSumListCopy() {
+        return new ArrayList(mSumsArrayList);
     }
 
     private void updateUiByView(String textViewId, String message) {
