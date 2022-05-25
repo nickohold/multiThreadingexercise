@@ -13,27 +13,32 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "NICKTag";
     private Handler mMainThreadHandler;
     private Handler mCalcThreadHandler;
     private Handler mSumCalcThreadHandler;
-    private ArrayList<Integer> mSumsArrayList = new ArrayList<Integer>();
+    private List<Integer> mSumsArrayList = Collections.synchronizedList(new ArrayList<Integer>());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setSCrollableViews();
+        setScrollableViews();
 
         mCalcThreadHandler = getNewThreadHandler("CalcThread");
         mSumCalcThreadHandler = getNewThreadHandler("sumCalcThread");
         mMainThreadHandler = new Handler(Looper.getMainLooper());
+
+        setRandValueToEditTextById("num1");
+        setRandValueToEditTextById("num2");
     }
 
-    private void setSCrollableViews() {
+    private void setScrollableViews() {
         TextView sumTextView = (TextView) getViewById("sumTextView");
         TextView totalSumTextView = (TextView) getViewById("totalSumTextView");
         sumTextView.setMovementMethod(new ScrollingMovementMethod());
@@ -42,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         totalSumsArrayTextView.setMovementMethod(new ScrollingMovementMethod());
     }
 
-    public Handler getNewThreadHandler(String threadName) {
+    private Handler getNewThreadHandler(String threadName) {
         HandlerThread handlerThread = new HandlerThread(threadName);
         handlerThread.start();
         return new Handler(handlerThread.getLooper());
@@ -59,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void finishCalc(int sum) {
-        updateSumArray(sum);
+        mSumsArrayList.add(sum);
         updateUiByView("sumTextView", Integer.toString(sum));
         int sumOfAll = getSumOfArray();
         mSumCalcThreadHandler.post(new Runnable() {
@@ -68,20 +73,19 @@ public class MainActivity extends AppCompatActivity {
                 updateUiByView("totalSumTextView", Integer.toString(sumOfAll));
             }
         });
-
-    }
-
-    public synchronized void updateSumArray(int sum) {
-        try {
-            mSumsArrayList.add(sum);
-            Thread.sleep(400);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        mMainThreadHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                setRandValueToEditTextById("num1");
+                setRandValueToEditTextById("num2");
+            }
+        });
     }
 
     private int getSumOfArray() {
-        return mSumsArrayList.stream().reduce(0, (sum, next) -> sum + next);
+        synchronized(mSumsArrayList) {
+            return mSumsArrayList.stream().reduce(0, (sum, next) -> sum + next);
+        }
     }
 
     private void updateUiByView(String textViewId, String message) {
@@ -104,6 +108,13 @@ public class MainActivity extends AppCompatActivity {
             num = Integer.parseInt(temp);
         }
         return num;
+    }
+
+    private void setRandValueToEditTextById(String id) {
+        EditText editText = (EditText) getViewById(id);
+        Random random = new Random();
+        int ranNum = random.nextInt(10);
+        editText.setText(Integer.toString(ranNum));
     }
 
     private View getViewById(String id) {

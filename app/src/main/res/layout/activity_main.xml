@@ -38,7 +38,6 @@
 
         android:inputType="number"
         android:minHeight="48dp"
-
         android:textColorHint="#757575"
         app:layout_constraintStart_toEndOf="@+id/num1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +53,6 @@
         android:minHeight="48dp"
         app:layout_constraintEnd_toStartOf="@+id/num2"
         app:layout_constraintHorizontal_bias="0.184"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
