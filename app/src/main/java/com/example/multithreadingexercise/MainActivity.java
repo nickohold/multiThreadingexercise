@@ -12,16 +12,14 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "NICKTag";
     private Handler mMainThreadHandler;
     private Handler mCalcThreadHandler;
     private Handler mSumCalcThreadHandler;
-    private int mTotalSum = 0;
     private ArrayList<Integer> mSumsArrayList = new ArrayList<Integer>();
 
     @Override
@@ -61,26 +59,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void finishCalc(int sum) {
-        updateSumsVariables(sum);
+        updateSumArray(sum);
         updateUiByView("sumTextView", Integer.toString(sum));
+        int sumOfAll = getSumOfArray();
         mSumCalcThreadHandler.post(new Runnable() {
             @Override
             public void run() {
-                updateUiByView("totalSumTextView", Integer.toString(mTotalSum));
+                updateUiByView("totalSumTextView", Integer.toString(sumOfAll));
             }
         });
 
     }
 
-    public synchronized void updateSumsVariables(int sum) {
+    public synchronized void updateSumArray(int sum) {
         try {
             mSumsArrayList.add(sum);
-            mTotalSum += sum;
             Thread.sleep(400);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
 
+    private int getSumOfArray() {
+        return mSumsArrayList.stream().reduce(0, (sum, next) -> sum + next);
     }
 
     private void updateUiByView(String textViewId, String message) {
