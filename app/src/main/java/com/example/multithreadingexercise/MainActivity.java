@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         return getSumListCopy().stream().reduce(0, (sum, next) -> sum + next);
     }
     
-    private List getSumListCopy() {
+    private synchronized List getSumListCopy() {
         return new ArrayList(mSumsArrayList);
     }
 
