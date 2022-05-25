@@ -66,10 +66,10 @@ public class MainActivity extends AppCompatActivity {
     private void finishCalc(int sum) {
         mSumsArrayList.add(sum);
         updateUiByView("sumTextView", Integer.toString(sum));
-        int sumOfAll = getSumOfArray();
         mSumCalcThreadHandler.post(new Runnable() {
             @Override
             public void run() {
+                int sumOfAll = getSumOfArray();
                 updateUiByView("totalSumTextView", Integer.toString(sumOfAll));
             }
         });
